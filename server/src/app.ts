@@ -1,7 +1,5 @@
 import dotenv from "dotenv";
 
-import "./database";
-
 import express from "express";
 import cors from "cors";
 
