@@ -6,5 +6,7 @@ const router = Router();
 
 router.get("/", taskController.findAll);
 router.get("/:id", taskController.findOne);
+router.post("/", taskController.create);
+router.delete("/:id", taskController.delete);
 
 export default router;
