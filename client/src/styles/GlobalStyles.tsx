@@ -188,8 +188,9 @@ export default createGlobalStyle`
     border-top-color: ${primary_500};
     animation: spinner 0.6s linear infinite;
   }
+
   .loading {
-    margin: 0 auto;
+    display: flex;
   }
 
   .title {
@@ -200,4 +201,12 @@ export default createGlobalStyle`
 export const Container = styled.section`
   max-width: var(--max-width);
   background-color: ${primary_500};
+`;
+
+export const Loading = styled.div`
+  background-color: ${grey_200};
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
