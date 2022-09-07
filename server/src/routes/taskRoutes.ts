@@ -8,5 +8,6 @@ router.get("/", taskController.findAll);
 router.get("/:id", taskController.findOne);
 router.post("/", taskController.create);
 router.delete("/:id", taskController.delete);
+router.patch("/:id", taskController.update);
 
 export default router;

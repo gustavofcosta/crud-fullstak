@@ -52,11 +52,30 @@ class TaskController {
 
   async update(req: Request, res: Response) {
     try {
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+      const { id } = req.params;
+      const { title, isCompleted } = req.body;
 
-    return res.json("update");
+      const task = await prisma.task.findUnique({ where: { id: Number(id) } });
+
+      if (!task)
+        return res
+          .status(404)
+          .json({ msg: `Nenhuma tarefa com o id: ${id} encontrada` });
+
+      const newTask = await prisma.task.update({
+        where: {
+          id: Number(id),
+        },
+        data: {
+          title,
+          isCompleted,
+        },
+      });
+
+      return res.status(200).json(newTask);
+    } catch (error) {
+      return res.status(500).json({ error: [error] });
+    }
   }
 
   async delete(req: Request, res: Response) {
