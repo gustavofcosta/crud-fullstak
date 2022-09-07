@@ -10,13 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Task {
-  id          String @id @default(uuid())
-  content     String
-  completed   Boolean @default(false)
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now())
-
-  @@map("tasks")
+  id          Int @id @default(autoincrement())
+  title       String
+  isCompleted Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

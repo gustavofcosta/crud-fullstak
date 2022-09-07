@@ -1,14 +1,15 @@
 import dotenv from "dotenv";
 
-import express from "express";
+import express, { Application } from "express";
 import cors from "cors";
 
-import homeRoutes from "./routes/homeRouter";
+import homeRoutes from "./routes/homeRoutes";
+import taskRoutes from "./routes/taskRoutes";
 
 dotenv.config();
 
 class App {
-  app: any;
+  app: Application;
   constructor() {
     this.app = express();
     this.middleware();
@@ -21,7 +22,8 @@ class App {
   }
 
   routes() {
-    this.app.use("/", homeRoutes);
+    this.app.use("/api/v1", homeRoutes);
+    this.app.use("/api/v1/tasks", taskRoutes);
   }
 }
 
