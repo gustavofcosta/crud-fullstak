@@ -2,34 +2,17 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "../../services/axios";
 import { Loading } from "../../styles/GlobalStyles";
-
-interface PropsTask {
-  id: number;
-  title: string;
-  isCompleted: boolean;
-}
+import { getAllTasks, PropsTask } from "../../features/task/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, useAppDispatch } from "../../store";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, tasks } = useSelector((store: RootState) => store.tasks);
 
-  const getTasks = async () => {
-    try {
-      setIsLoading(true);
-
-      const { data } = await axios.get("/tasks");
-      setTasks(data);
-
-      setIsLoading(false);
-    } catch (error) {
-      toast.error("Servidor fora do ar");
-
-      setIsLoading(false);
-    }
-  };
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    getTasks();
+    dispatch(getAllTasks());
   }, []);
 
   if (isLoading) {
