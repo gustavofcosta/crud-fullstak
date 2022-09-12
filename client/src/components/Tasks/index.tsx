@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "../../services/axios";
 import { Loading } from "../../styles/GlobalStyles";
-import { getAllTasks, PropsTask } from "../../features/task/taskSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../../store";
+import { getAllTasks, PropsTask } from "../../features/task/taskSlice";
 
 const Tasks = () => {
   const { isLoading, tasks } = useSelector((store: RootState) => store.tasks);

@@ -8,10 +8,10 @@ export const primary_700 = "#3c3799";
 export const primary_800 = "#282566";
 export const primary_900 = "#141233";
 
-export const secondary_100 = "###fef7d3";
-export const secondary_200 = "##fdefa8";
-export const secondary_300 = "##fce77c";
-export const secondary_400 = "##fbdf51";
+export const secondary_100 = "#fef7d3";
+export const secondary_200 = "#fdefa8";
+export const secondary_300 = "#fce77c";
+export const secondary_400 = "#fbdf51";
 export const secondary_500 = "#fad725";
 export const secondary_600 = "#c8ac1e";
 export const secondary_700 = "#968116";

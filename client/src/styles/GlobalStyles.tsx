@@ -16,7 +16,7 @@ import {
 export default createGlobalStyle`
   :root {
     --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1)
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -29,6 +29,7 @@ export default createGlobalStyle`
     --transition: 0.3s ease-in-out all;
     --max-width: 1120px;
     --fixed-width: 600px;
+
   }
 
   *{
@@ -200,7 +201,8 @@ export default createGlobalStyle`
 
 export const Container = styled.section`
   max-width: var(--max-width);
-  background-color: ${primary_500};
+  max-height: 100vh;
+  margin: 0 auto;
 `;
 
 export const Loading = styled.div`

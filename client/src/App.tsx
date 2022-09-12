@@ -1,11 +1,7 @@
-import Tasks from "./components/Tasks";
+import TodoApp from "./components/TodoApp";
 
 function App() {
-  return (
-    <div>
-      <Tasks />
-    </div>
-  );
+  return <TodoApp />;
 }
 
 export default App;
