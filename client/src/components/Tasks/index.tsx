@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import axios from "../../services/axios";
+import { useEffect } from "react";
 import { Loading } from "../../styles/GlobalStyles";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState, useAppDispatch } from "../../store";
-import { getAllTasks, PropsTask } from "../../features/task/taskSlice";
+import { TaskProps, useGlobalContext } from "../../context/appContext";
 
 const Tasks = () => {
-  const { isLoading, tasks } = useSelector((store: RootState) => store.tasks);
-
-  const dispatch = useDispatch<AppDispatch>();
+  const { isLoading, tasks, getTasks } = useGlobalContext();
 
   useEffect(() => {
-    dispatch(getAllTasks());
+    getTasks();
   }, []);
 
   if (isLoading) {
@@ -27,7 +21,7 @@ const Tasks = () => {
     <div>
       <h1 className="title">Todas as tarefas</h1>
       <div>
-        {tasks.map((task: PropsTask) => {
+        {tasks.map((task: TaskProps) => {
           const { id, title, isCompleted } = task;
           return <div key={id}>{title}</div>;
         })}
