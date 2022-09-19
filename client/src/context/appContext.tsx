@@ -20,23 +20,26 @@ export interface TaskProps {
   isCompleted: boolean;
 }
 
-type forecastProps = {
+export interface ForecastProps {
   main: { temp: number };
   name: string;
   sys: { country: string };
-  weather: [{ description: string }];
-};
+  weather: [{ description: string; icon: string }];
+}
 
 export interface InitialContextInterface {
   tasks: TaskProps[];
-  forecast: any[];
+  forecast: ForecastProps;
   isLoading: boolean;
+  location: boolean;
   getTasks: () => Promise<void>;
   getForecast: (lat: number, long: number) => Promise<void>;
+  getLocation: () => void;
 }
+
 export const initialState = {
   tasks: [],
-  forecast: [],
+  forecast: {},
   isLoading: false,
   location: false,
 };
@@ -47,18 +50,6 @@ export const AppContext = createContext<InitialContextInterface>(
 
 export const AppProvider = ({ children }: ChildrenProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const getTasks = async () => {
-    dispatch({ type: TASKS_REQUEST });
-
-    try {
-      const { data } = await axios.get("/tasks");
-      dispatch({ type: TASKS_SUCCESS, payload: data });
-    } catch (error) {
-      toast("Erro na rede");
-      dispatch({ type: TASKS_FAILURE });
-    }
-  };
 
   const getForecast = async (lat: number, long: number) => {
     try {
@@ -77,14 +68,33 @@ export const AppProvider = ({ children }: ChildrenProps) => {
         }
       );
       dispatch({ type: FORECAST_SUCCESS, payload: data });
-      console.log(data);
     } catch (error) {
       dispatch({ type: FORECAST_REQUEST });
     }
   };
 
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      getForecast(position.coords.latitude, position.coords.longitude);
+    });
+  };
+
+  const getTasks = async () => {
+    dispatch({ type: TASKS_REQUEST });
+
+    try {
+      const { data } = await axios.get("/tasks");
+      dispatch({ type: TASKS_SUCCESS, payload: data });
+    } catch (error) {
+      toast("Erro na rede");
+      dispatch({ type: TASKS_FAILURE });
+    }
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, getTasks, getForecast }}>
+    <AppContext.Provider
+      value={{ ...state, getTasks, getForecast, getLocation }}
+    >
       {children}
     </AppContext.Provider>
   );

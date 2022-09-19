@@ -20,6 +20,8 @@ export const secondary_900 = "#322b07";
 
 export const backGroundColor = "#f1f5f9";
 export const textColor = "#1e293b";
+export const nightColor = "#243447";
+export const dayColor = "#ffab72 ";
 
 export const grey_100 = "#f1f5f9";
 export const grey_200 = "#e2e8f0";

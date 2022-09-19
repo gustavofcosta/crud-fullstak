@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "../../styles/GlobalStyles";
 import { Actives, DayOfTheWeek, Wrapper } from "./styled";
 
@@ -19,11 +19,19 @@ interface PropsTemp {
 const TodoApp = () => {
   const { tasks, getTasks } = useGlobalContext();
 
-  useEffect(() => {}, []);
+  const [isDayTime, setIsDayTime] = useState(true);
+
+  const currentHour = new Date().getHours();
+
+  useEffect(() => {
+    if (currentHour > 18) {
+      setIsDayTime(false);
+    }
+  }, []);
 
   return (
     <Container>
-      <Wrapper>
+      <Wrapper isDayTime={isDayTime}>
         <nav>
           <div>
             Bom dia,<span> Gustavo</span>

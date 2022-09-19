@@ -1,14 +1,19 @@
 import styled from "styled-components";
 import {
+  dayColor,
+  grey_300,
+  nightColor,
   primary_400,
   primary_500,
   secondary_200,
   secondary_300,
+  textColor,
 } from "../../config/colors";
 import { md } from "../../config/responsive";
 
-export const Wrapper = styled.div`
-  background-color: ${secondary_300};
+export const Wrapper = styled.div<{ isDayTime: boolean }>`
+  background-color: ${({ isDayTime }) => (isDayTime ? dayColor : nightColor)};
+  color: ${({ isDayTime }) => (isDayTime ? textColor : grey_300)};
 
   nav {
     display: flex;

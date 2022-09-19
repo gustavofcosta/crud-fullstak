@@ -1,4 +1,4 @@
-import { initialState, TaskProps } from "./appContext";
+import { ForecastProps, initialState, TaskProps } from "./appContext";
 
 import {
   FORECAST_FAILURE,
@@ -14,7 +14,7 @@ type ACTIONTYPE =
   | { type: "TASKS_SUCCESS"; payload: [] }
   | { type: "TASKS_FAILURE" }
   | { type: "FORECAST_REQUEST" }
-  | { type: "FORECAST_SUCCESS"; payload: [] }
+  | { type: "FORECAST_SUCCESS"; payload: any }
   | { type: "FORECAST_FAILURE" };
 
 const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
@@ -52,6 +52,7 @@ const reducer = (state: typeof initialState, action: ACTIONTYPE) => {
       ...state,
       isLoading: false,
       forecast: action.payload,
+      location: true,
     };
   }
 
